@@ -1,0 +1,20 @@
+engineStrict: true
+
+allowBuilds:
+  '@parcel/watcher': false
+  esbuild: false
+
+overrides:
+  # Security: glob (GHSA-3g3m-2fjr-6pw4) and minimatch (GHSA-g3hv-75wg-m249) are fixed only on new
+  # majors, which no parent asks for yet.
+  'glob@<14.0.2': 14.0.3
+  'minimatch@<11.0.1': 11.0.3
+
+# deepmerge has no fixed release (GHSA-gcqx-w48m-w2h4, via nitropack's @rollup/plugin-node-resolve):
+# the patch drops "__proto__" keys. Drop the patch and its ignore when a release fixes it.
+patchedDependencies:
+  deepmerge@4.3.1: patches/deepmerge@4.3.1.patch
+
+auditConfig:
+  ignoreGhsas:
+    - GHSA-gcqx-w48m-w2h4 # deepmerge 4.3.1, patched above

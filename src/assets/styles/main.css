@@ -1,0 +1,79 @@
+@import "tailwindcss";
+
+/* The only source of colour and size: components read these names in their scoped styles, and
+   Tailwind gets them through @theme. Light, then dark. */
+:root {
+  --accent: #1f8a70;
+  --accent-ink: #0e5847;
+  --accent-wash: #e8f4f0;
+  --ink: #17212b;
+  --muted: #5c6875;
+  --paper: #f7f9fc;
+  --card: #ffffff;
+  --line: #e3e8ef;
+  --line-strong: #d3dae3;
+  --danger: #b3261e;
+  --danger-wash: #fdecea;
+  /* Buttons: at least 4.5:1 in both modes (main.test.ts). */
+  --button: #0e5847;
+  --button-hover: #0a4034;
+  --on-button: #ffffff;
+
+  --header-height: 56px;
+  --sidebar-width: 200px;
+  --gutter: 24px;
+  --radius: 8px;
+  --font-base: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic UI", "Meiryo", system-ui, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --accent: #3fb597;
+    --accent-ink: #8fe0cb;
+    --accent-wash: #12261f;
+    --ink: #e7edf3;
+    --muted: #95a2b1;
+    --paper: #0f161e;
+    --card: #18222d;
+    --line: #26313d;
+    --line-strong: #33414f;
+    --danger: #f2b8b5;
+    --danger-wash: #3a1614;
+    --button: #3fb597;
+    --button-hover: #8fe0cb;
+    --on-button: #0f161e;
+  }
+}
+
+@media (max-width: 760px) {
+  :root {
+    --gutter: 16px;
+  }
+}
+
+@theme inline {
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-wash: var(--accent-wash);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-paper: var(--paper);
+  --color-card: var(--card);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-danger: var(--danger);
+  --color-danger-wash: var(--danger-wash);
+  --color-button: var(--button);
+  --color-button-hover: var(--button-hover);
+  --color-on-button: var(--on-button);
+}
+
+html,
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-base);
+  font-size: 15px;
+  line-height: 1.6;
+}
