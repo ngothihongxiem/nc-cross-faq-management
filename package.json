@@ -13,11 +13,12 @@
     "build": "nuxt build",
     "preview": "nuxt preview --port 8200 --host localhost",
     "postinstall": "nuxt prepare",
-    "lint": "oxlint src --fix",
-    "lint:check": "oxlint src",
-    "typecheck": "vue-tsc --noEmit",
+    "lint": "oxlint src server shared --fix",
+    "lint:check": "oxlint src server shared",
+    "typecheck": "vue-tsc --noEmit && vue-tsc --noEmit -p .nuxt/tsconfig.server.json",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "api:types": "openapi-typescript http://localhost:8100/openapi.json -o server/types/backend.d.ts"
   },
   "dependencies": {
     "nuxt": "4.6.4",
@@ -29,6 +30,7 @@
   "devDependencies": {
     "@tailwindcss/vite": "4.3.3",
     "@types/node": "^24.13.5",
+    "openapi-typescript": "7.13.0",
     "oxlint": "1.83.0",
     "tailwindcss": "4.3.3",
     "vitest": "^5.0.5"
