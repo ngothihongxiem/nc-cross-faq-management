@@ -1,0 +1,54 @@
+diff --git a/dist/cjs.js b/dist/cjs.js
+index 7c36cbdd06cc22c92d590be3f87a08a91ca06b40..cb295087dbb49a6e66b15aaec7d5970d9f120340 100644
+--- a/dist/cjs.js
++++ b/dist/cjs.js
+@@ -57,8 +57,12 @@ function getEnumerableOwnPropertySymbols(target) {
+ 		: []
+ }
+ 
++// Drop "__proto__" whatever the target's shape: assigning it sets the result's prototype
++// (CVE-2026-93753, deepmerge#273). propertyIsUnsafe misses it for a null or null-prototype target.
+ function getKeys(target) {
+-	return Object.keys(target).concat(getEnumerableOwnPropertySymbols(target))
++	return Object.keys(target).filter(function(key) {
++		return key !== '__proto__'
++	}).concat(getEnumerableOwnPropertySymbols(target))
+ }
+ 
+ function propertyIsOnObject(object, property) {
+diff --git a/dist/umd.js b/dist/umd.js
+index 4071e7c56ec8e5273fe166f6e723ac460fab8b72..c48eb8d41023599b3b2f9be95f2389f67058070b 100644
+--- a/dist/umd.js
++++ b/dist/umd.js
+@@ -61,8 +61,12 @@
+ 			: []
+ 	}
+ 
++	// Drop "__proto__" whatever the target's shape: assigning it sets the result's prototype
++	// (CVE-2026-93753, deepmerge#273). propertyIsUnsafe misses it for a null or null-prototype target.
+ 	function getKeys(target) {
+-		return Object.keys(target).concat(getEnumerableOwnPropertySymbols(target))
++		return Object.keys(target).filter(function(key) {
++			return key !== '__proto__'
++		}).concat(getEnumerableOwnPropertySymbols(target))
+ 	}
+ 
+ 	function propertyIsOnObject(object, property) {
+diff --git a/index.js b/index.js
+index 77968aed5d456cccc294f60912ef381fa1e52a7b..a2b6b624ed9fead5e19db5b53cd5d83a94216a46 100644
+--- a/index.js
++++ b/index.js
+@@ -32,8 +32,12 @@ function getEnumerableOwnPropertySymbols(target) {
+ 		: []
+ }
+ 
++// Drop "__proto__" whatever the target's shape: assigning it sets the result's prototype
++// (CVE-2026-93753, deepmerge#273). propertyIsUnsafe misses it for a null or null-prototype target.
+ function getKeys(target) {
+-	return Object.keys(target).concat(getEnumerableOwnPropertySymbols(target))
++	return Object.keys(target).filter(function(key) {
++		return key !== '__proto__'
++	}).concat(getEnumerableOwnPropertySymbols(target))
+ }
+ 
+ function propertyIsOnObject(object, property) {

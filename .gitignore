@@ -1,0 +1,9 @@
+node_modules/
+.nuxt/
+.output/
+.data/
+dist/
+.superpowers/
+.DS_Store
+.env
+.env.*
