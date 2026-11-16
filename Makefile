@@ -1,6 +1,6 @@
 .DEFAULT_GOAL := help
 
-.PHONY: help install dev build preview test check lint audit
+.PHONY: help install dev build preview test check lint audit api-types
 
 help: ## List the targets
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  %-10s %s\n", $$1, $$2}'
@@ -28,3 +28,6 @@ lint: ## Lint
 
 audit: ## Check the locked dependencies for known vulnerabilities
 	pnpm audit
+
+api-types: ## Regenerate server/types/backend.d.ts from the local backend (make api there)
+	pnpm api:types

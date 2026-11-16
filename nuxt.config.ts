@@ -22,6 +22,11 @@ export default defineNuxtConfig({
     },
   },
 
+  runtimeConfig: {
+    // Server only: the browser never calls the backend. NUXT_BACKEND_URL overrides it.
+    backendUrl: 'http://localhost:8100',
+  },
+
   typescript: {
     strict: true,
   },
